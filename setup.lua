@@ -42,6 +42,7 @@ local function setup()
     register_function('insert')
     register_function('update')
     register_function('upsert')
+    register_function('select')
 end
 
 setup()

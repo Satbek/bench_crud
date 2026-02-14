@@ -48,6 +48,14 @@ local function upsert_crud(space, tuple, operations, opts)
     call.storage_api.call_on_storage('guest', '_crud.upsert_on_storage', space, tuple, operations, opts)
 end
 
+local function select_raw(space_name, index_name, key, opts)
+    box.space[space_name].index[index_name]:select(key, opts)
+end
+
+local function select_crud(space_name, index_id, conditions, opts)
+    call.storage_api.call_on_storage('guest', '_crud.select_on_storage', space_name, index_id, conditions, opts)
+end
+
 return {
     replace_raw = replace_raw,
     replace_crud = replace_crud,
@@ -61,4 +69,6 @@ return {
     update_crud = update_crud,
     upsert_raw = upsert_raw,
     upsert_crud = upsert_crud,
+    select_raw = select_raw,
+    select_crud = select_crud,
 }
